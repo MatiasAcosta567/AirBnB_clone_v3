@@ -2,12 +2,9 @@
 """Index file"""
 
 from api.v1.views import app_views
-from flask import Flask
+from flask import jsonify
 
 
-app = Flask(__name__)
-
-
-@app.route('/status')
-def index():
+@app_views.route('/status')
+def status():
     return jsonify({'status': 'OK'})
