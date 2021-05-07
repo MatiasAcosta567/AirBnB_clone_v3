@@ -7,9 +7,7 @@ from models import storage
 from models.state import State
 
 
-@app_views.route('/states',
-                 methods=['GET', 'POST', 'DELETE', 'PUT'],
-                 strict_slashes=False)
+@app_views.route('/states', methods=['GET', 'POST'], strict_slashes=False)
 @app_views.route('/states/<state_id>',
                  methods=['GET', 'POST', 'DELETE', 'PUT'],
                  strict_slashes=False)
@@ -31,6 +29,7 @@ def states(state_id=None):
             for key, value in new_dict.items():
                 if state_id == value.id:
                     storage.delete(value)
+                    storage.save()
                     return jsonify({}), 200
             abort(404)
     elif request.method == 'POST':
