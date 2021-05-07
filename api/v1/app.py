@@ -15,6 +15,14 @@ def context(self):
     storage.close()
 
 
+@app.errorhandler(404)
+def handle_invalid_usage(error):
+    response = {
+        'error': "Not found"
+    }
+    return jsonify(response)
+
+
 if __name__ == '__main__':
     my_port = getenv('HBNB_API_PORT', 5000)
     my_host = getenv('HBNB_API_HOST', '0.0.0.0')
