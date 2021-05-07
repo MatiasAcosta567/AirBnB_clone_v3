@@ -41,8 +41,8 @@ def all_places(place_id):
 
 @app_views.route('/places/<place_id>', methods=['GET', 'PUT', 'DELETE'],
                  strict_slashes=False)
-def places(city_id=None):
-    place = storage.get(City, city_id)
+def places(place_id=None):
+    place = storage.get(Place, place_id)
     if place is not None:
         if request.method == 'GET':
             return jsonify(place.to_dict())
