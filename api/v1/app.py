@@ -16,12 +16,6 @@ def context(self):
 
 
 if __name__ == '__main__':
-    if (getenv('HBNB_API_HOST') != None):
-        my_host = getenv('HBNB_API_HOST')
-    else:
-        my_host = '0.0.0.0'
-    if (getenv('HBNB_API_PORT') != None):
-        my_port = getenv(('HBNB_API_PORT'))
-    else:
-        my_port = 5000
-    app.run(host=my_host, port=my_port,threaded=True)
+    my_port = getenv('HBNB_API_PORT', 5000)
+    my_host = getenv('HBNB_API_HOST', '0.0.0.0')
+    app.run(host=my_host, port=my_port, threaded=True)
