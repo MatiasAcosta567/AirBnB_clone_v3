@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""City View"""
+"""Places View"""
 
 from api.v1.views import app_views
 from flask import jsonify, request, abort
@@ -41,7 +41,7 @@ def all_places(place_id):
 
 @app_views.route('/places/<place_id>', methods=['GET', 'PUT', 'DELETE'],
                  strict_slashes=False)
-def cities(city_id=None):
+def places(city_id=None):
     place = storage.get(City, city_id)
     if place is not None:
         if request.method == 'GET':
