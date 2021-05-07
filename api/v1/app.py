@@ -20,7 +20,7 @@ def handle_invalid_usage(error):
     response = {
         'error': "Not found"
     }
-    return jsonify(response)
+    return jsonify(response), 404
 
 
 if __name__ == '__main__':
