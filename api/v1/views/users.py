@@ -40,7 +40,7 @@ def users(user_id=None):
             abort(400, 'Missing email')
         if 'password' not in json.keys():
             abort(400, 'Missing password')
-        new_user = user(**json)
+        new_user = User(**json)
         storage.new(new_user)
         storage.save()
         return jsonify(new_user.to_dict()), 201
