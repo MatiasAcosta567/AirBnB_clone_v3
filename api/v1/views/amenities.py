@@ -52,7 +52,7 @@ def amenities(amenity_id=None):
             if amenity is not None:
                 for key, value in json.items():
                     setattr(amenity, key, value)
-                state.save()
+                amenity.save()
                 return jsonify(amenity.to_dict()), 200
             else:
                 abort(404)
