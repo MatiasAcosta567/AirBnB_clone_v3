@@ -11,7 +11,7 @@ from models.amenity import Amenity
 @app_views.route('/amenities/<amenity_id>',
                  methods=['GET', 'POST', 'DELETE', 'PUT'],
                  strict_slashes=False)
-def states(amenity_id=None):
+def amenities(amenity_id=None):
     new_dict = storage.all(Amenity)
     if request.method == 'GET':
         if amenity_id is None:
