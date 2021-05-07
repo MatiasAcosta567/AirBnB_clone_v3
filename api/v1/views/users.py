@@ -40,11 +40,10 @@ def users(user_id=None):
             abort(400, 'Missing email')
         if 'password' not in json.keys():
             abort(400, 'Missing password')
-        else:
-            new_user = user(**json)
-            storage.new(new_user)
-            storage.save()
-            return jsonify(new_user.to_dict()), 201
+        new_user = user(**json)
+        storage.new(new_user)
+        storage.save()
+        return jsonify(new_user.to_dict()), 201
     elif request.method == 'PUT':
         if user_id is not None:
             json = request.get_json()
@@ -53,7 +52,8 @@ def users(user_id=None):
             user = storage.get(User, user_id)
             if user is not None:
                 for key, value in json.items():
-                    setattr(user, key, value)
+                    if value != 'email':
+                        setattr(user, key, value)
                 user.save()
                 return jsonify(user.to_dict()), 200
             else:
