@@ -11,7 +11,7 @@ from models.user import User
 
 @app_views.route('/cities/<city_id>/places', methods=['GET', 'POST'],
                  strict_slashes=False)
-def all_places(place_id):
+def all_places(city_id):
     city = storage.get(City, city_id)
     if city is not None:
         if request.method == 'GET':
@@ -32,6 +32,7 @@ def all_places(place_id):
             user = storage.get(User, json['user_id'])
             if user is None:
                 abort(404)
+            json['city_id'] = city_id
             new_place = Place(**json)
             storage.new(new_place)
             storage.save()
