@@ -33,10 +33,10 @@ def all_reviews(place_id):
             if user is None:
                 abort(404)
             json['place_id'] = place_id
-            new_place = Place(**json)
-            storage.new(new_place)
+            new_review = Review(**json)
+            storage.new(new_review)
             storage.save()
-            return jsonify(new_place.to_dict()), 201
+            return jsonify(new_review.to_dict()), 201
     abort(404)
 
 
