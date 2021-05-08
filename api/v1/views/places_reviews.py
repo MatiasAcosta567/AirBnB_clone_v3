@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Places View"""
+"""Review View"""
 
 from api.v1.views import app_views
 from flask import jsonify, request, abort
 from models import storage
-from models.place import Place
 from models.review import Review
+from models.place import Place
 from models.user import User
+
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET', 'POST'],
@@ -17,7 +18,7 @@ def all_reviews(place_id):
         if request.method == 'GET':
             reviews = storage.all(Review)
             new_list = []
-            for key, value in places.items():
+            for key, value in reviews.items():
                 if value.place_id == place.id:
                     new_list.append(value.to_dict())
             return jsonify(new_list)
@@ -42,7 +43,7 @@ def all_reviews(place_id):
 
 @app_views.route('/reviews/<review_id>', methods=['GET', 'PUT', 'DELETE'],
                  strict_slashes=False)
-def places(review_id=None):
+def reviews(review_id=None):
     review = storage.get(Review, review_id)
     if review is not None:
         if request.method == 'GET':
