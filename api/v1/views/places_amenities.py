@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Amenities View"""
 
-from os import getenv
 from api.v1.views import app_views
 from flask import jsonify, request, abort, make_response
 from models import storage
@@ -15,11 +14,11 @@ from models import storage_t
                  strict_slashes=False)
 def get_amenities(place_id):
     """get amenity information for a specified place"""
-    place = storage.get("Place", place_id)
+    place = storage.get(Place, place_id)
     if place is None:
         abort(404)
     amenities = []
-    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+    if storage_t == 'db':
         amenity_objects = place.amenities
     else:
         amenity_objects = place.amenity_ids
